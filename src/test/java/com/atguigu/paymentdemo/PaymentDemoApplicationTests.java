@@ -12,6 +12,7 @@ class PaymentDemoApplicationTests {
 
     @Test
     void getPrivateKey() {
+        System.out.println("haha");
         String fileName=wxPayConfig.getPrivateKeyPath();
         System.out.println(wxPayConfig.getPrivateKey(fileName));
     }

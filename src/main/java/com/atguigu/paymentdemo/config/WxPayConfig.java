@@ -45,7 +45,7 @@ public class WxPayConfig {
     //接收结果通知地址
     private String notifyDomain;
 
-    private PrivateKey getPrivateKey(String privateKeyPath) {
+    public PrivateKey getPrivateKey(String privateKeyPath) {
         try {
             return PemUtil.loadPrivateKey(new FileInputStream(privateKeyPath));
         } catch (Exception e) {
