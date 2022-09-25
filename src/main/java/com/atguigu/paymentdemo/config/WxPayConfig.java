@@ -42,6 +42,8 @@ public class WxPayConfig {
     private String apiV3Key;
     //appID
     private String appid;
+    // 微信服务器地址
+    private String domain;
     //接收结果通知地址
     private String notifyDomain;
 
