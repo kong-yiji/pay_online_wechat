@@ -1,6 +1,7 @@
 package com.atguigu.paymentdemo.service;
 
 import com.atguigu.paymentdemo.entity.OrderInfo;
+import com.atguigu.paymentdemo.enums.OrderStatus;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.springframework.stereotype.Service;
 
@@ -13,4 +14,8 @@ public interface OrderInfoService extends IService<OrderInfo> {
     void saveCodeUrl(String orderNo,String codeUrl);
 
     List<OrderInfo> listOrderByCreateTimeDesc();
+
+    String getOrderStatus(String orderNo);
+
+    void updateStatusByOrderNo(String orderNo, OrderStatus success);
 }

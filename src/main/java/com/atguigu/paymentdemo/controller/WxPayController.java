@@ -75,4 +75,18 @@ public class WxPayController {
             return gson.toJson(map);
         }
     }
+
+     @ApiOperation("取消订单")
+     @PostMapping("/cancel/{orderNo}")
+    public R cancel(@PathVariable String orderNo) throws IOException {
+        log.info("取消订单");
+        wxPayService.cancelOrder(orderNo);
+        return R.ok().setMessage("取消成功");
+     }
+     @RequestMapping(value = "/query/{orderNo}",method = RequestMethod.GET)
+     public R queryOrder(@PathVariable String orderNo) throws IOException {
+        log.info("查询订单");
+        String result=wxPayService.queryOrder(orderNo);
+        return R.ok().setMessage("查询成功").data("result",result);
+     }
 }

@@ -1,16 +1,15 @@
 package com.atguigu.paymentdemo.controller;
 
 import com.atguigu.paymentdemo.entity.OrderInfo;
+import com.atguigu.paymentdemo.enums.OrderStatus;
 import com.atguigu.paymentdemo.service.OrderInfoService;
 import com.atguigu.paymentdemo.vo.R;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.websocket.server.PathParam;
 import java.util.List;
 
 /**
@@ -31,4 +30,15 @@ public class OrderInfoController {
         List<OrderInfo> list = orderInfoService.listOrderByCreateTimeDesc();
         return R.ok().data("list", list);
     }
+
+
+@ApiOperation("订单状态")
+@RequestMapping(value = "query-order-status/{orderNo}",method = RequestMethod.GET)
+    public R queryOrderStatus(@PathVariable String orderNo){
+        String orderStatus=orderInfoService.getOrderStatus(orderNo);
+        if(orderStatus.equals(OrderStatus.SUCCESS.getType())){
+            return R.ok().setMessage("支付成功");
+        }
+        return R.ok().setCode(101).setMessage("支付中...");
+}
 }

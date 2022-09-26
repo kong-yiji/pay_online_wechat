@@ -63,6 +63,25 @@ public class OrderInfoServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo
        return baseMapper.selectList(list);
     }
 
+    @Override
+    public String getOrderStatus(String orderNo) {
+        QueryWrapper<OrderInfo>queryWrapper=new QueryWrapper<>();
+        queryWrapper.eq("order_no",orderNo);
+        OrderInfo orderInfo=baseMapper.selectOne(queryWrapper);
+        if(orderInfo==null)return null;
+            return orderInfo.getOrderStatus();
+    }
+
+    @Override
+    public void updateStatusByOrderNo(String orderNo, OrderStatus success) {
+        //修改订单状态
+       QueryWrapper queryWrapper= new QueryWrapper<>();
+       queryWrapper.eq("order_no",orderNo);
+        OrderInfo orderInfo=new OrderInfo();
+        orderInfo.setOrderStatus(success.getType());
+       baseMapper.update(orderInfo,queryWrapper);
+    }
+
 
     /**
      * 根据商品id查询未支付订单
