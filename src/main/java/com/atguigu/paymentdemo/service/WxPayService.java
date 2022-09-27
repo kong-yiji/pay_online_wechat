@@ -1,6 +1,5 @@
 package com.atguigu.paymentdemo.service;
 
-import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -17,4 +16,13 @@ public interface WxPayService {
     void cancelOrder(String orderNo) throws IOException;
 
     String queryOrder(String orderNo) throws IOException;
+
+    void checkOrderStatus(String orderNo) throws IOException;
+    void refund(String orderNo,String reason) throws IOException;
+
+    String queryRefund(String refundNo) throws Exception;
+     void checkRefundStatus(String refundNo) throws Exception;
+     void processRefund(Map<String, Object> bodyMap) throws Exception;
+    String downloadBill(String billDate, String type) throws Exception;
+    String queryBill(String billDate, String type) throws Exception;
 }
